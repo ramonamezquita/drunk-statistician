@@ -1,14 +1,10 @@
 ---
-const { platform, username } = Astro.props;
+interface Props {
+    href: string;
+    iclass: string;
+}
+
+const { href, iclass } = Astro.props;
 ---
 
-<a href={`https://www.${platform}.com/${username}`}>{platform}</a>
-
-<style>
-    a {
-        padding: 0.5rem 1rem;
-        color: white;
-        background-color: #4c1d95;
-        text-decoration: none;
-    }
-</style>
+<a href={href}><i class={iclass}></i></a>

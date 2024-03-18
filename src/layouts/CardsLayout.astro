@@ -1,0 +1,12 @@
+---
+import Card from "../components/Card.astro";
+import cardsData from "../data/cardsData.js";
+---
+
+<div class="cards">
+    {
+        cardsData.map((card) => (
+            <Card title={card.title} description={card.description} />
+        ))
+    }
+</div>
