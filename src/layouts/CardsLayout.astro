@@ -3,10 +3,17 @@ import Card from "../components/Card.astro";
 import cardsData from "../data/cardsData.js";
 ---
 
-<div class="cards">
-    {
-        cardsData.map((card) => (
-            <Card title={card.title} description={card.description} />
-        ))
-    }
-</div>
+<main>
+    <section class="cards">
+        {
+            cardsData.map((card) => (
+                <Card
+                    title={card.title}
+                    description={card.description}
+                    imagePath={card.imagePath}
+                    altText={card.altText}
+                />
+            ))
+        }
+    </section>
+</main>

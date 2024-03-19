@@ -1,18 +1,36 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
 interface Props {
     title: string;
     description: string;
+    imagePath: string;
+    altText: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, imagePath, altText } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+    "/src/assets/*.{jpeg,jpg,png,gif}",
+);
+
+if (!images[imagePath])
+    throw new Error(
+        `"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`,
+    );
 ---
 
 <div class="card">
-    <div class="card-content">
-        <h2>{title}</h2>
-        <p>{description}</p>
+    <div class="card__image-container">
+        <Image src={images[imagePath]()} alt={altText} />
     </div>
-    <div class="card-bottom">
-        <b-button class="btn-primary">See more</b-button>
+    <div class="card__content">
+        <p class="card__title text--medium">
+            {title}
+        </p>
+        <div class="card__info">
+            <p class="text--medium">30 Min</p>
+            <p class="card__price text--medium">Free</p>
+        </div>
     </div>
 </div>
